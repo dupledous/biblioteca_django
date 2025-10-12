@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}<title>cliente</title>{% endblock title %}
+{% block content %}
+<h1>lista de generos</h1>
+    {% if genero_list %}
+    <ul>
+        {% for genero in genero_list %}
+            <li>
+               <a href="{{genero.id}}"></a>
+               {{genero.nombre}}
+            </li>
+        
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>no hay genero</p>
+
+    {% endif %}
+
+{% endblock content %}

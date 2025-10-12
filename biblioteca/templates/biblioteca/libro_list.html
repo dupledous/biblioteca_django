@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}<title>cliente</title>{% endblock title %}
+{% block content %}
+{% load static %}
+<h1>lista de libro</h1>
+{% if libro_list %}
+    {% for libro in libro_list %}
+    <div class="card mb-3" style="width: 18rem;">
+        {% if libro.imagen  %}
+        <img src=" {{libro.imagen.url}} " class= "card-img-top" alt="...">
+        {% else %}
+        <img src=" {% static "biblioteca/images/l.jpg" %} " class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title"> {{libro.titulo}} </h5>
+            <p class="card-text"> {{libro.autor}} 
+                {{libro.Genero}}
+            </p>
+            <a href=" {{libro.id}} " class="btn btn-primary">{{libro.titulo}}</a>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endif %}
+
+{% endblock content %}
