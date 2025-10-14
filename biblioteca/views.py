@@ -4,6 +4,7 @@ from .models import Cliente,Libro,Genero
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
+from .service import get_libro
 
 
 
@@ -48,3 +49,16 @@ class ClienteCreateView(CreateView):
     fields='__all__'
     template_name ='biblioteca/cliente_form.html'
     success_url = reverse_lazy('clientes')
+    
+def buscar_libro(request):
+    query = request.GET.get('q')
+    libros= []
+        
+    if query:
+        libros = get_libro(query)
+    contexto ={
+        "libros":libros,
+        "query":query,
+        }
+    return render(request,'biblioteca/catalogo.html',contexto)
+            

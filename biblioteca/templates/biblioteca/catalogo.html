@@ -1,9 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
+<header>
+    <form method="get">
+        <input type="text" name="q" placeholder="Buscar libro..." value="{{ query|default:'' }}">
+        <button type="submit">Buscar</button>
+    </form>
+</header>
 <div class="bg-secondary text-center ">
 <li><a href="{% url "libros" %}">libros</a>libros</li>
 <li><a href="{% url "generos" %}">generos</a>genero</li>
-
+<div class="libros">
+    {% for libro in libros %}
+        <div class="card">
+            {% if libro.imagen %}
+                <img src="{{ libro.imagen }}" alt="{{ libro.titulo }}">
+            {% endif %}
+            <h3>{{ libro.titulo }}</h3>
+            <p><strong>Autor:</strong> {{ libro.autor }}</p>
+            <p>{{ libro.descripcion|truncatewords:20 }}</p>
+            <a href="{{ libro.link }}" target="_blank">Ver más</a>
+        </div>
+        {% empty %}
+        <p style="text-align:center;">No hay resultados</p>
+        {% endfor %}
 {% endblock content %}
   
     
