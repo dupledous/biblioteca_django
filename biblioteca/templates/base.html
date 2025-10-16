@@ -8,11 +8,15 @@
 </head>
 <body>
     {% block sidebar %}
+    {% if user.is_authenticated %}
+
         <header>
+            
             <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-warning rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
                 <li class="nav-item" role="presentation">
                     <a href="{% url 'index' %}">home</a>
                 </li>
+                
                 <li class="nav-item" role="presentation">
                     <a href="{% url 'cliente-add' %}">contacto</a>
                 </li>
@@ -22,6 +26,17 @@
                 <li class="nav-item" role="presentation">
                     <a href="{% url 'clientes' %}">clientes</a>
                 </li>
+                <li>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout" class="btn btn-link">
+                    </form>
+                </li>
+                {% else %}
+                <li>
+                    <a href='{% url "login" %}'></a>
+                </li>
+                {% endif %}
         
             </ul>
         </header>

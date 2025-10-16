@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tienda de Productos - Tiendita</h1>
+
+<p>Bienvenido a la <em><strong>Tiendita</strong></em>, la mejor tienda de productos del país.</p>
+
+<div class="shadow p-3 mb-5 bg-white rounded w-50" >
+  <div class="alert alert-success" role="alert">
+    <h2>Logged out!</h2>
+    <a href="{% url 'login'%}">Click here to login again.</a>
+  </div>
+</div>
+{% endblock %}

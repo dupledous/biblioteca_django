@@ -12,4 +12,5 @@ urlpatterns = [
     path("clientes/<int:pk>",views.ClienteDetailView.as_view(), name="cliente-detail"),
     path("libros/<int:pk>",views.LibroDetailView.as_view(), name="libro-detail"),
     path("clientes/add/",views.ClienteCreateView.as_view(), name="cliente-add"),
+     path('register/', views.register, name='register')
 ]

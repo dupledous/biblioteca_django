@@ -1,14 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import generic
 from .models import Cliente,Libro,Genero
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 from .service import get_libro
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 
 
-
+@login_required
 def index(request):
     return render(request, "biblioteca/index.html")
 
@@ -61,4 +63,17 @@ def buscar_libro(request):
         "query":query,
         }
     return render(request,'biblioteca/catalogo.html',contexto)
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirige al login después de registrarse
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
             
